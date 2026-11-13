@@ -1,0 +1,43 @@
+
+.add-exercise {
+  padding: 30px;
+}
+
+.add-exercise form {
+  display: grid;
+  gap: 15px;
+  max-width: 500px;
+}
+
+.add-exercise label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.add-exercise input,
+.add-exercise select,
+.add-exercise textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.add-exercise textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.add-exercise button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+}
+
+.form-error {
+  color: red;
+}

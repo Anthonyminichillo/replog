@@ -1,0 +1,29 @@
+
+.exercise-list {
+  padding: 30px;
+}
+
+.exercise-list h2 {
+  margin-bottom: 20px;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.exercise-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+}
+
+.exercise-card h3 {
+  margin-top: 0;
+}
+
+.exercise-card p {
+  line-height: 1.5;
+}

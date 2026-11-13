@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
+import ExerciseList from './components/ExerciseList.jsx';
+import AddExercise from './components/AddExercise.jsx';
 
 function App() {
-  const [status, setStatus] = useState('checking...');
+  const [refresh, setRefresh] = useState(0);
 
-  useEffect(() => {
-    fetch('/api/health')
-      .then((res) => res.json())
-      .then((data) => setStatus(data.status))
-      .catch(() => setStatus('backend unreachable'));
-  }, []);
+  function handleExerciseAdded() {
+    setRefresh((current) => current + 1);
+  }
 
   return (
     <main>
       <h1>RepLog</h1>
-      <p>Backend status: {status}</p>
+      <AddExercise onExerciseAdded={handleExerciseAdded} />
+      <ExerciseList key={refresh} />
     </main>
   );
 }
