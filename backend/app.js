@@ -8,6 +8,9 @@ import exercisesRouter from './routes/exercises.js';
 import configurePassport from './config/passport.js';
 import authRouter from './routes/auth.js';
 
+import workoutsRouter from './routes/workouts.js';
+import requireAuth from './middleware/requireAuth.js';
+
 const app = express();
 app.use(express.json());
 
@@ -42,6 +45,8 @@ app.use(passport.session());
 
 app.use('/api/exercises', exercisesRouter);
 app.use('/api/auth', authRouter);
+
+app.use('/api/workouts', requireAuth, workoutsRouter);
 
 app.get('/api/health', async (req, res) => {
   try {
