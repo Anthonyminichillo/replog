@@ -1,43 +1,102 @@
 
 .add-exercise {
-  padding: 30px;
+  margin: 30px 35px;
+  padding: 26px;
+  background: #ded9c9;
+  border: 1px solid #c5c1b3;
+  border-top: 4px solid var(--forest);
+  box-shadow: 3px 3px 0 rgba(38, 56, 45, 0.08);
+}
+
+.add-exercise h2 {
+  margin: 0 0 8px;
+  color: var(--forest);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .add-exercise form {
   display: grid;
-  gap: 15px;
-  max-width: 500px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 100%;
+  margin-top: 20px;
 }
 
 .add-exercise label {
   display: grid;
-  gap: 6px;
+  gap: 7px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .add-exercise input,
 .add-exercise select,
 .add-exercise textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font: inherit;
+  width: 100%;
+  padding: 12px;
+  color: var(--charcoal);
+  background: var(--cream);
+  border: 1px solid #b8b39f;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.add-exercise input:focus,
+.add-exercise select:focus,
+.add-exercise textarea:focus {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.15);
 }
 
 .add-exercise textarea {
-  min-height: 80px;
+  min-height: 100px;
   resize: vertical;
 }
 
 .add-exercise button {
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #222;
-  color: white;
-  cursor: pointer;
+  grid-column: 1 / -1;
+  padding: 14px 20px;
+  color: var(--cream);
+  background: var(--forest);
+  border: 1px solid var(--forest);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background 0.2s ease;
+}
+
+.add-exercise button:hover {
+  background: var(--olive);
 }
 
 .form-error {
-  color: red;
+  color: #8b4137;
+  font-weight: 600;
+}
+
+@media (max-width: 650px) {
+  .add-exercise {
+    margin: 20px 15px;
+    padding: 18px;
+  }
+
+  .add-exercise form {
+    grid-template-columns: 1fr;
+  }
+}
+.add-exercise label:nth-of-type(6),
+.add-exercise label:nth-of-type(7) {
+  grid-column: 1 / -1;
 }

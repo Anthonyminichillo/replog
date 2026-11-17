@@ -1,0 +1,137 @@
+
+.app-shell {
+  min-height: 100vh;
+  background: #e9e6dc;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 28px 5%;
+  color: var(--cream);
+  background: var(--forest);
+  border-bottom: 5px solid var(--olive);
+  box-shadow: 0 4px 12px rgba(38, 56, 45, 0.15);
+}
+
+.brand-label,
+.brand-tagline,
+.user-label,
+.header-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.brand-label {
+  margin: 0 0 2px;
+  color: var(--sage);
+}
+
+.brand h1 {
+  margin: 0;
+  color: var(--cream);
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+}
+
+.brand h1 span {
+  color: var(--khaki);
+}
+
+.brand-tagline {
+  margin: 8px 0 0;
+  color: var(--sage);
+}
+
+.user-panel {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.user-label {
+  margin: 0 0 5px;
+  color: var(--sage);
+}
+
+.user-email {
+  margin: 0;
+  color: var(--cream);
+  font-size: 14px;
+}
+
+.logout-button {
+  padding: 11px 17px;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--sage);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logout-button:hover {
+  color: var(--forest);
+  background: var(--khaki);
+}
+
+.header-status {
+  color: var(--sage);
+  text-align: right;
+}
+
+.auth-layout {
+  min-height: 65vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.auth-layout .auth-card {
+  margin-top: 65px;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 5%;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 650px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 20px;
+  }
+
+  .brand h1 {
+    font-size: 48px;
+  }
+
+  .user-panel {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-status {
+    text-align: left;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    padding: 18px 20px;
+  }
+}
