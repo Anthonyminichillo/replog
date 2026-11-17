@@ -1,0 +1,197 @@
+
+.exercise-list {
+  padding: 35px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.exercise-list h2 {
+  color: var(--forest);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 25px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--forest);
+}
+
+.exercise-list > input {
+  width: 100%;
+  padding: 15px 18px;
+  margin-bottom: 14px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--olive);
+  border-radius: 3px;
+  color: var(--charcoal);
+  font-size: 15px;
+  outline: none;
+}
+
+.exercise-list > input:focus {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.15);
+}
+
+.exercise-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px;
+  margin-bottom: 28px;
+  background: #ded9c9;
+  border: 1px solid var(--border);
+}
+
+.exercise-filters select {
+  width: 100%;
+  padding: 11px;
+  color: var(--forest);
+  background: var(--cream);
+  border: 1px solid #b8b39f;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+}
+
+.exercise-card {
+  padding: 22px;
+  border: 1px solid #c5c1b3;
+  border-top: 4px solid var(--olive);
+  border-radius: 3px;
+  background: var(--cream);
+  box-shadow: 3px 3px 0 rgba(38, 56, 45, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.exercise-card:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--forest);
+  box-shadow: 5px 6px 0 rgba(38, 56, 45, 0.12);
+}
+
+.exercise-card h3 {
+  color: var(--forest);
+  font-size: 24px;
+  line-height: 1.1;
+  margin: 0 0 14px;
+}
+
+.exercise-card p {
+  color: #55594f;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 9px 0;
+}
+
+.exercise-card strong {
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.exercise-card button {
+  padding: 10px 13px;
+  margin: 8px 6px 0 0;
+  color: var(--cream);
+  background: var(--olive);
+  border: 1px solid var(--forest);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease;
+}
+
+.exercise-card button:hover {
+  background: var(--forest);
+}
+
+.exercise-card button:last-child {
+  background: transparent;
+  color: #8b4137;
+  border-color: #8b4137;
+}
+
+.exercise-card button:last-child:hover {
+  color: white;
+  background: #8b4137;
+}
+
+.exercise-instructions {
+  margin-top: 18px;
+  padding: 15px;
+  background: #e5e1d4;
+  border-left: 3px solid var(--olive);
+}
+
+.exercise-instructions h4 {
+  margin: 0 0 10px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.exercise-instructions li {
+  padding: 4px 0;
+  color: #55594f;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.exercise-card form label {
+  display: block;
+  margin: 12px 0;
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.exercise-card form input,
+.exercise-card form select,
+.exercise-card form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--charcoal);
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .exercise-list {
+    padding: 20px 15px;
+  }
+
+  .exercise-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .exercise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .exercise-filters {
+    grid-template-columns: 1fr;
+  }
+}

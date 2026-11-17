@@ -1,0 +1,92 @@
+
+.auth-card {
+  width: min(100% - 40px, 460px);
+  margin: 70px auto;
+  padding: 38px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--forest);
+  box-shadow: 5px 5px 0 rgba(38, 56, 45, 0.12);
+}
+
+.auth-card h2 {
+  margin: 0 0 28px;
+  color: var(--forest);
+  font-size: 38px;
+  letter-spacing: 0.06em;
+}
+
+.auth-card form {
+  display: grid;
+  gap: 18px;
+}
+
+.auth-card label {
+  display: grid;
+  gap: 8px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 13px;
+  color: var(--charcoal);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.15);
+}
+
+.auth-card button {
+  padding: 13px 18px;
+  color: var(--cream);
+  background: var(--forest);
+  border: 1px solid var(--forest);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.auth-card button:hover {
+  background: var(--olive);
+}
+
+.auth-card p {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.auth-card p button {
+  padding: 0;
+  color: var(--olive);
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+}
+
+.auth-card p button:hover {
+  color: var(--forest);
+  background: transparent;
+}
+
+@media (max-width: 500px) {
+  .auth-card {
+    padding: 25px;
+    margin: 35px auto;
+  }
+}

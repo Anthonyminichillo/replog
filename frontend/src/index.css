@@ -1,8 +1,52 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #292d2a;
+  background: #e9e6dc;
+
+  --forest: #26382d;
+  --olive: #526b50;
+  --sage: #a8b49a;
+  --khaki: #d5c8a8;
+  --cream: #f3f0e6;
+  --charcoal: #292d2a;
+  --border: #c9c5b7;
+  --muted: #77796f;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  min-width: 320px;
+  font-family: 'DM Sans', sans-serif;
+  background: #e9e6dc;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+::selection {
+  color: var(--cream);
+  background: var(--olive);
 }
