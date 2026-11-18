@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import WorkoutCard from './WorkoutCard.jsx';
+import WorkoutForm from './WorkoutForm.jsx';
 
 const PAGE_SIZE = 20;
 const DAY_MS = 1000 * 60 * 60 * 24;
@@ -23,6 +24,8 @@ function WorkoutHistory() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [editingId, setEditingId] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     fetch('/api/workouts')
@@ -40,7 +43,12 @@ function WorkoutHistory() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [reloadKey]);
+
+  function handleEditSaved() {
+    setEditingId(null);
+    setReloadKey((current) => current + 1);
+  }
 
   async function handleDelete(workoutId) {
     const confirmed = window.confirm(
@@ -109,13 +117,25 @@ function WorkoutHistory() {
         <p>No workouts logged yet.</p>
       ) : (
         <div className="workout-list">
-          {workouts.slice(0, visibleCount).map((workout) => (
-            <WorkoutCard
-              key={workout._id}
-              workout={workout}
-              onDelete={handleDelete}
-            />
-          ))}
+          {workouts
+            .slice(0, visibleCount)
+            .map((workout) =>
+              editingId === workout._id ? (
+                <WorkoutForm
+                  key={workout._id}
+                  initialWorkout={workout}
+                  onSaved={handleEditSaved}
+                  onCancel={() => setEditingId(null)}
+                />
+              ) : (
+                <WorkoutCard
+                  key={workout._id}
+                  workout={workout}
+                  onEdit={setEditingId}
+                  onDelete={handleDelete}
+                />
+              )
+            )}
         </div>
       )}
 

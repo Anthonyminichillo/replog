@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 const PAGES = [
   { id: 'exercises', label: 'Exercises' },
+  { id: 'log', label: 'Log Workout' },
   { id: 'history', label: 'Workout History' },
 ];
 

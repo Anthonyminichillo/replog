@@ -5,6 +5,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import NavBar from './components/NavBar.jsx';
 import WorkoutHistory from './components/WorkoutHistory.jsx';
+import WorkoutForm from './components/WorkoutForm.jsx';
 import './App.css';
 
 function App() {
@@ -114,6 +115,7 @@ function App() {
               <ExerciseList key={refresh} />
             </>
           )}
+          {page === 'log' && <WorkoutForm onSaved={() => setPage('history')} />}
 
           {page === 'history' && <WorkoutHistory />}
         </>

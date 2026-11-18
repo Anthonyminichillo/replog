@@ -16,7 +16,7 @@ function formatSet(set) {
   return `${set.reps} × ${set.weight} lb`;
 }
 
-function WorkoutCard({ workout, onDelete }) {
+function WorkoutCard({ workout, onEdit, onDelete }) {
   return (
     <article className="workout-card">
       <header>
@@ -37,6 +37,9 @@ function WorkoutCard({ workout, onDelete }) {
 
       {workout.notes && <p className="workout-notes">{workout.notes}</p>}
 
+      <button type="button" onClick={() => onEdit(workout._id)}>
+        Edit
+      </button>
       <button type="button" onClick={() => onDelete(workout._id)}>
         Delete
       </button>
@@ -63,6 +66,7 @@ WorkoutCard.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
