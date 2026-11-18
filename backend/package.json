@@ -1,10 +1,9 @@
 {
   "name": "replog-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Express + MongoDB API for RepLog, a workout logging app",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "node --watch app.js",
     "seed": "node db/seed.js",
@@ -13,7 +12,7 @@
     "format": "prettier --write ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Anthony Minichillo and Alex Dat Huynh",
   "license": "MIT",
   "type": "module",
   "dependencies": {

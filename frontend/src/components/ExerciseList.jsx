@@ -352,4 +352,6 @@ function ExerciseList() {
   );
 }
 
+ExerciseList.propTypes = {};
+
 export default ExerciseList;
