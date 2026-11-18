@@ -12,6 +12,7 @@ import workoutsRouter from './routes/workouts.js';
 import requireAuth from './middleware/requireAuth.js';
 
 const app = express();
+app.set('trust proxy', 1);
 app.use(express.json());
 
 const client = new MongoClient(process.env.MONGO_URI);
@@ -35,7 +36,8 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
     },
   })
 );
