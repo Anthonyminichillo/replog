@@ -6,7 +6,7 @@ Anthony Minichillo and Alex Dat Huynh
 
 ## Class Link
 
-[Class name](PASTE-CLASS-LINK-HERE)
+[CS5610 Web Development](https://northeastern.instructure.com/courses/261032)
 
 ## Project Objective
 
