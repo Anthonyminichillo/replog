@@ -6,8 +6,7 @@ const router = Router();
 const TARGET_REPS = 8;
 const MIN_REPS = 5;
 const WEIGHT_INCREMENT = 5;
-
-
+const DELOAD_DAYS = 14;
 
 function parseSets(sets) {
   if (!Array.isArray(sets) || sets.length === 0) return null;
@@ -76,6 +75,10 @@ async function addExerciseNames(db, exercises) {
   return true;
 }
 
+function roundToFive(weight) {
+  return Math.round(weight / WEIGHT_INCREMENT) * WEIGHT_INCREMENT;
+}
+
 // READ (workouts)
 router.get('/', async (req, res) => {
   try {
@@ -85,24 +88,6 @@ router.get('/', async (req, res) => {
       .sort({ date: -1 })
       .toArray();
     res.json(workouts);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// READ (one workout)
-router.get('/:id', async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ error: 'Invalid workout id' });
-    }
-    const workout = await req.app.locals.db
-      .collection('workouts')
-      .findOne({ _id: new ObjectId(req.params.id), userId: req.user._id });
-    if (!workout) {
-      return res.status(404).json({ error: 'Workout not found' });
-    }
-    res.json(workout);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -119,7 +104,9 @@ router.get('/progress/:exerciseId', async (req, res) => {
     const sessions = await req.app.locals.db
       .collection('workouts')
       .aggregate([
-        { $match: { userId: req.user._id, 'exercises.exerciseId': exerciseId } },
+        {
+          $match: { userId: req.user._id, 'exercises.exerciseId': exerciseId },
+        },
         { $unwind: '$exercises' },
         { $match: { 'exercises.exerciseId': exerciseId } },
         { $unwind: '$exercises.sets' },
@@ -170,10 +157,6 @@ router.get('/progress/:exerciseId', async (req, res) => {
   }
 });
 
-function roundToFive(weight) {
-  return Math.round(weight / 5) * 5;
-}
-
 // READ (weight suggestion for one exercise)
 router.get('/suggestion/:exerciseId', async (req, res) => {
   try {
@@ -186,7 +169,7 @@ router.get('/suggestion/:exerciseId', async (req, res) => {
       .collection('workouts')
       .findOne(
         { userId: req.user._id, 'exercises.exerciseId': exerciseId },
-        { sort: { date: -1 } },
+        { sort: { date: -1 } }
       );
     if (!lastWorkout) {
       return res.json({
@@ -197,16 +180,22 @@ router.get('/suggestion/:exerciseId', async (req, res) => {
     }
 
     const matches = lastWorkout.exercises.filter((exercise) =>
-      exercise.exerciseId.equals(exerciseId),
+      exercise.exerciseId.equals(exerciseId)
     );
     const sets = matches.flatMap((exercise) => exercise.sets);
     const lastWeight = Math.max(...sets.map((set) => set.weight));
     const topSets = sets.filter((set) => set.weight === lastWeight);
+    const daysSince = Math.floor(
+      (Date.now() - lastWorkout.date.getTime()) / 86400000
+    );
 
     let suggestedWeight = lastWeight;
     let reason;
     if (lastWeight === 0) {
       reason = 'Bodyweight exercise: aim for one more rep per set';
+    } else if (daysSince > DELOAD_DAYS) {
+      suggestedWeight = roundToFive(lastWeight * 0.9);
+      reason = `It has been ${daysSince} days since you did this, so ease back in at about 90%`;
     } else if (topSets.every((set) => set.reps >= TARGET_REPS)) {
       suggestedWeight = lastWeight + WEIGHT_INCREMENT;
       reason = `You hit ${TARGET_REPS}+ reps on every set at ${lastWeight}, so go up ${WEIGHT_INCREMENT}`;
@@ -221,6 +210,7 @@ router.get('/suggestion/:exerciseId', async (req, res) => {
       exerciseId,
       exerciseName: matches[0].exerciseName,
       lastWorkoutDate: lastWorkout.date,
+      daysSince,
       lastWeight,
       suggestedWeight,
       reason,
@@ -230,6 +220,23 @@ router.get('/suggestion/:exerciseId', async (req, res) => {
   }
 });
 
+// READ (one workout)
+router.get('/:id', async (req, res) => {
+  try {
+    if (!ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid workout id' });
+    }
+    const workout = await req.app.locals.db
+      .collection('workouts')
+      .findOne({ _id: new ObjectId(req.params.id), userId: req.user._id });
+    if (!workout) {
+      return res.status(404).json({ error: 'Workout not found' });
+    }
+    res.json(workout);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // CREATE (workout)
 router.post('/', async (req, res) => {
