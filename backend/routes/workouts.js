@@ -3,6 +3,12 @@ import { ObjectId } from 'mongodb';
 
 const router = Router();
 
+const TARGET_REPS = 8;
+const MIN_REPS = 5;
+const WEIGHT_INCREMENT = 5;
+
+
+
 function parseSets(sets) {
   if (!Array.isArray(sets) || sets.length === 0) return null;
   const parsed = [];
@@ -126,7 +132,7 @@ router.get('/progress/:exerciseId', async (req, res) => {
             totalReps: { $sum: '$exercises.sets.reps' },
             volume: {
               $sum: {
-                $multiply: ['$exercises.sets.reps', '$exercises.sets.weight'],
+                $multiply: ['$exercises.sets.weight', '$exercises.sets.reps'],
               },
             },
           },
@@ -156,8 +162,68 @@ router.get('/progress/:exerciseId', async (req, res) => {
     res.json({
       exerciseId,
       exerciseName: sessions[0]?.exerciseName ?? null,
-      personalRecord,
       sessions,
+      personalRecord,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+function roundToFive(weight) {
+  return Math.round(weight / 5) * 5;
+}
+
+// READ (weight suggestion for one exercise)
+router.get('/suggestion/:exerciseId', async (req, res) => {
+  try {
+    if (!ObjectId.isValid(req.params.exerciseId)) {
+      return res.status(400).json({ error: 'Invalid exercise id' });
+    }
+    const exerciseId = new ObjectId(req.params.exerciseId);
+
+    const lastWorkout = await req.app.locals.db
+      .collection('workouts')
+      .findOne(
+        { userId: req.user._id, 'exercises.exerciseId': exerciseId },
+        { sort: { date: -1 } },
+      );
+    if (!lastWorkout) {
+      return res.json({
+        exerciseId,
+        suggestedWeight: null,
+        reason: 'Log this exercise once to get a suggestion',
+      });
+    }
+
+    const matches = lastWorkout.exercises.filter((exercise) =>
+      exercise.exerciseId.equals(exerciseId),
+    );
+    const sets = matches.flatMap((exercise) => exercise.sets);
+    const lastWeight = Math.max(...sets.map((set) => set.weight));
+    const topSets = sets.filter((set) => set.weight === lastWeight);
+
+    let suggestedWeight = lastWeight;
+    let reason;
+    if (lastWeight === 0) {
+      reason = 'Bodyweight exercise: aim for one more rep per set';
+    } else if (topSets.every((set) => set.reps >= TARGET_REPS)) {
+      suggestedWeight = lastWeight + WEIGHT_INCREMENT;
+      reason = `You hit ${TARGET_REPS}+ reps on every set at ${lastWeight}, so go up ${WEIGHT_INCREMENT}`;
+    } else if (topSets.some((set) => set.reps < MIN_REPS)) {
+      suggestedWeight = roundToFive(lastWeight * 0.9);
+      reason = `A set at ${lastWeight} fell below ${MIN_REPS} reps, so deload about 10%`;
+    } else {
+      reason = `Stay at ${lastWeight} until you hit ${TARGET_REPS} reps on every set`;
+    }
+
+    res.json({
+      exerciseId,
+      exerciseName: matches[0].exerciseName,
+      lastWorkoutDate: lastWorkout.date,
+      lastWeight,
+      suggestedWeight,
+      reason,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

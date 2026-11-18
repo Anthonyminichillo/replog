@@ -8,6 +8,7 @@
     "start": "node app.js",
     "dev": "node --watch app.js",
     "seed": "node db/seed.js",
+    "seed:workouts": "node db/seedWorkouts.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
