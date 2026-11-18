@@ -102,6 +102,69 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// READ (progress for one exercise)
+router.get('/progress/:exerciseId', async (req, res) => {
+  try {
+    if (!ObjectId.isValid(req.params.exerciseId)) {
+      return res.status(400).json({ error: 'Invalid exercise id' });
+    }
+    const exerciseId = new ObjectId(req.params.exerciseId);
+
+    const sessions = await req.app.locals.db
+      .collection('workouts')
+      .aggregate([
+        { $match: { userId: req.user._id, 'exercises.exerciseId': exerciseId } },
+        { $unwind: '$exercises' },
+        { $match: { 'exercises.exerciseId': exerciseId } },
+        { $unwind: '$exercises.sets' },
+        {
+          $group: {
+            _id: '$_id',
+            date: { $first: '$date' },
+            exerciseName: { $first: '$exercises.exerciseName' },
+            topWeight: { $max: '$exercises.sets.weight' },
+            totalReps: { $sum: '$exercises.sets.reps' },
+            volume: {
+              $sum: {
+                $multiply: ['$exercises.sets.reps', '$exercises.sets.weight'],
+              },
+            },
+          },
+        },
+        { $sort: { date: 1 } },
+        {
+          $project: {
+            _id: 0,
+            workoutId: '$_id',
+            date: 1,
+            exerciseName: 1,
+            topWeight: 1,
+            totalReps: 1,
+            volume: 1,
+          },
+        },
+      ])
+      .toArray();
+
+    let personalRecord = null;
+    for (const session of sessions) {
+      if (!personalRecord || session.topWeight > personalRecord.weight) {
+        personalRecord = { weight: session.topWeight, date: session.date };
+      }
+    }
+
+    res.json({
+      exerciseId,
+      exerciseName: sessions[0]?.exerciseName ?? null,
+      personalRecord,
+      sessions,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // CREATE (workout)
 router.post('/', async (req, res) => {
   try {
