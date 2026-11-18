@@ -119,8 +119,6 @@ function App() {
           {page === 'progress' && <ProgressTracker />}
           {page === 'log' && <WorkoutForm onSaved={() => setPage('history')} />}
           {page === 'history' && <WorkoutHistory />}
-          
-          
         </>
       ) : (
         <div className="auth-layout">
