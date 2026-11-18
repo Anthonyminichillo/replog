@@ -60,7 +60,7 @@ async function addExerciseNames(db, exercises) {
     .find({ _id: { $in: ids } }, { projection: { name: 1 } })
     .toArray();
   const names = new Map(
-    found.map((exercise) => [exercise._id.toString(), exercise.name]),
+    found.map((exercise) => [exercise._id.toString(), exercise.name])
   );
   for (const exercise of exercises) {
     const name = names.get(exercise.exerciseId.toString());
@@ -146,7 +146,7 @@ router.put('/:id', async (req, res) => {
       .collection('workouts')
       .updateOne(
         { _id: new ObjectId(req.params.id), userId: req.user._id },
-        { $set: { ...workout, lastModified: new Date() } },
+        { $set: { ...workout, lastModified: new Date() } }
       );
     if (result.matchedCount === 0) {
       return res.status(404).json({ error: 'Workout not found' });
