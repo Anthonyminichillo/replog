@@ -1,0 +1,104 @@
+.progress-tracker {
+  padding: 35px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.progress-tracker h2 {
+  color: var(--forest);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 25px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--forest);
+}
+
+.progress-tracker > p {
+  margin: 0 0 20px;
+  color: #55594f;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.progress-tracker > label {
+  display: grid;
+  gap: 7px;
+  max-width: 640px;
+  margin-bottom: 14px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.progress-tracker input,
+.progress-tracker select {
+  width: 100%;
+  padding: 13px 16px;
+  color: var(--charcoal);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--olive);
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+}
+
+.progress-tracker input:focus,
+.progress-tracker select:focus {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.15);
+}
+
+.progress-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 10px;
+  padding: 16px;
+  margin: 14px 0 28px;
+  background: #ded9c9;
+  border: 1px solid var(--border);
+}
+
+.progress-summary div {
+  padding: 14px 16px;
+  background: var(--cream);
+  border-left: 5px solid var(--olive);
+}
+
+.progress-summary dt {
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progress-summary dd {
+  margin: 6px 0 0;
+  color: var(--forest);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Make the two numbers stand out */
+.progress-summary div:nth-child(-n + 2) dd {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .progress-tracker {
+    padding: 20px 15px;
+  }
+
+  .progress-summary {
+    grid-template-columns: 1fr;
+  }
+}

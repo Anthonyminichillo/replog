@@ -1,0 +1,232 @@
+.workout-form {
+  margin: 30px 35px;
+  padding: 26px;
+  background: #ded9c9;
+  border: 1px solid #c5c1b3;
+  border-top: 4px solid var(--forest);
+  box-shadow: 3px 3px 0 rgba(38, 56, 45, 0.08);
+}
+
+/* Inside the history list the edit form sits with the cards */
+.workout-list .workout-form {
+  margin: 0;
+}
+
+.workout-form h2 {
+  margin: 0 0 8px;
+  color: var(--forest);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.workout-form .workout-instructions {
+  margin: 0 0 20px;
+  color: #55594f;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.workout-form form {
+  display: grid;
+  gap: 18px;
+}
+
+.workout-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.workout-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.workout-form input,
+.workout-form select,
+.workout-form textarea {
+  width: 100%;
+  padding: 12px;
+  color: var(--charcoal);
+  background: var(--cream);
+  border: 1px solid #b8b39f;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.workout-form input:focus,
+.workout-form select:focus,
+.workout-form textarea:focus {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.15);
+}
+
+.workout-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.workout-form fieldset {
+  margin: 0;
+  padding: 18px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--olive);
+  border-radius: 3px;
+}
+
+.workout-form legend {
+  padding: 0 8px;
+  color: var(--forest);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.exercise-picker {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.logged-exercise table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+.logged-exercise th {
+  padding: 8px;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--border);
+}
+
+.logged-exercise td {
+  padding: 6px 8px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.logged-exercise td:first-child {
+  width: 50px;
+  color: var(--forest);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+}
+
+.logged-exercise input {
+  padding: 8px 10px;
+  background: white;
+}
+
+.workout-form button {
+  padding: 11px 15px;
+  margin-right: 6px;
+  color: var(--cream);
+  background: var(--olive);
+  border: 1px solid var(--forest);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease;
+}
+
+.workout-form button:hover {
+  background: var(--forest);
+}
+
+.workout-form button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.workout-form button:disabled:hover {
+  background: var(--olive);
+}
+
+.workout-form .remove-button {
+  color: #8b4137;
+  background: transparent;
+  border-color: #8b4137;
+}
+
+.workout-form .remove-button:hover {
+  color: white;
+  background: #8b4137;
+}
+
+.workout-form .remove-button:disabled:hover {
+  color: #8b4137;
+  background: transparent;
+}
+
+.workout-form .cancel-button {
+  color: var(--forest);
+  background: transparent;
+}
+
+.workout-form .cancel-button:hover {
+  color: var(--cream);
+}
+
+.workout-form .save-button {
+  padding: 14px 24px;
+  font-size: 12px;
+}
+
+.form-error {
+  margin: 0;
+  padding: 12px 15px;
+  color: #8b4137;
+  background: #f1e1dc;
+  border-left: 4px solid #8b4137;
+  font-size: 14px;
+}
+
+/* Hidden on screen but still read by screen readers */
+.workout-form .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .workout-form {
+    margin: 20px 15px;
+    padding: 18px;
+  }
+
+  .workout-details,
+  .exercise-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .logged-exercise th,
+  .logged-exercise td {
+    padding: 6px 4px;
+  }
+}

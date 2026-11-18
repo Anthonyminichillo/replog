@@ -1,0 +1,99 @@
+.workout-history {
+  padding: 35px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.workout-history > h2 {
+  color: var(--forest);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 25px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--forest);
+}
+
+.workout-history > .workout-instructions {
+  margin: 0 0 20px;
+  color: #55594f;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.workout-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px;
+  margin: 0 0 28px;
+  background: #ded9c9;
+  border: 1px solid var(--border);
+}
+
+.workout-stats div {
+  padding: 14px 16px;
+  background: var(--cream);
+  border-left: 5px solid var(--olive);
+}
+
+.workout-stats dt {
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workout-stats dd {
+  margin: 6px 0 0;
+  color: var(--forest);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.workout-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+/* The edit form takes the full width of the list */
+.workout-list .workout-form {
+  grid-column: 1 / -1;
+}
+
+.workout-history > button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 12px 22px;
+  color: var(--cream);
+  background: var(--olive);
+  border: 1px solid var(--forest);
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.workout-history > button:hover {
+  background: var(--forest);
+}
+
+@media (max-width: 700px) {
+  .workout-history {
+    padding: 20px 15px;
+  }
+
+  .workout-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .workout-list {
+    grid-template-columns: 1fr;
+  }
+}

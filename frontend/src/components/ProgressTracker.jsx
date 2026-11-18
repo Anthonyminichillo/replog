@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProgressChart from './ProgressChart.jsx';
+import './ProgressTracker.css';
 
 function formatDate(date) {
   return new Date(date).toLocaleDateString(undefined, {
@@ -29,9 +30,16 @@ function getLoggedExercises(workouts) {
   return [...counts.values()].sort((a, b) => b.count - a.count);
 }
 
+function filterExercises(exercises, search) {
+  return exercises.filter((exercise) =>
+    exercise.exerciseName.toLowerCase().includes(search.toLowerCase())
+  );
+}
+
 function ProgressTracker() {
   const [loggedExercises, setLoggedExercises] = useState([]);
   const [selectedId, setSelectedId] = useState('');
+  const [search, setSearch] = useState('');
   const [result, setResult] = useState(null);
   const [listLoading, setListLoading] = useState(true);
   const [error, setError] = useState('');
@@ -90,6 +98,17 @@ function ProgressTracker() {
     };
   }, [selectedId]);
 
+  function handleSearchChange(value) {
+    setSearch(value);
+    const matches = filterExercises(loggedExercises, value);
+    const selectedStillListed = matches.some(
+      (exercise) => exercise.exerciseId === selectedId
+    );
+    if (matches.length > 0 && !selectedStillListed) {
+      setSelectedId(matches[0].exerciseId);
+    }
+  }
+
   if (listLoading) {
     return <p>Loading progress...</p>;
   }
@@ -107,6 +126,7 @@ function ProgressTracker() {
     );
   }
 
+  const filteredExercises = filterExercises(loggedExercises, search);
   const loading = !result || result.exerciseId !== selectedId;
   const sessions = result?.progress.sessions ?? [];
   const isBodyweight = sessions.every((session) => session.topWeight === 0);
@@ -119,23 +139,38 @@ function ProgressTracker() {
     <section className="progress-tracker">
       <h2>Progress</h2>
       <p className="workout-instructions">
-        Choose an exercise you have logged to see your personal record, how your
-        top weight has changed and what weight to use this week.
+        Search or choose an exercise you have logged to see your personal
+        record, how your top weight has changed and what weight to use this
+        week.
       </p>
 
       <label>
-        Exercise
-        <select
-          value={selectedId}
-          onChange={(event) => setSelectedId(event.target.value)}
-        >
-          {loggedExercises.map((exercise) => (
-            <option key={exercise.exerciseId} value={exercise.exerciseId}>
-              {exercise.exerciseName} ({exercise.count} sessions)
-            </option>
-          ))}
-        </select>
+        Search
+        <input
+          type="search"
+          placeholder="e.g. squat"
+          value={search}
+          onChange={(event) => handleSearchChange(event.target.value)}
+        />
       </label>
+
+      {filteredExercises.length === 0 ? (
+        <p>No logged exercises match &quot;{search}&quot;.</p>
+      ) : (
+        <label>
+          Exercise
+          <select
+            value={selectedId}
+            onChange={(event) => setSelectedId(event.target.value)}
+          >
+            {filteredExercises.map((exercise) => (
+              <option key={exercise.exerciseId} value={exercise.exerciseId}>
+                {exercise.exerciseName} ({exercise.count} sessions)
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
       {loading ? (
         <p>Loading exercise...</p>

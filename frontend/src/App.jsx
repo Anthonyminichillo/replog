@@ -116,11 +116,10 @@ function App() {
               <ExerciseList key={refresh} />
             </>
           )}
-          {page === 'log' && <WorkoutForm onSaved={() => setPage('history')} />}
-
-
-          {page === 'history' && <WorkoutHistory />}
           {page === 'progress' && <ProgressTracker />}
+          {page === 'log' && <WorkoutForm onSaved={() => setPage('history')} />}
+          {page === 'history' && <WorkoutHistory />}
+          
           
         </>
       ) : (

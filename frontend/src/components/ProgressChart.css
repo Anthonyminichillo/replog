@@ -1,0 +1,34 @@
+.progress-chart {
+  margin: 0;
+  padding: 22px;
+  color: var(--olive);
+  background: var(--cream);
+  border: 1px solid #c5c1b3;
+  border-top: 4px solid var(--olive);
+  border-radius: 3px;
+  box-shadow: 3px 3px 0 rgba(38, 56, 45, 0.08);
+}
+
+.progress-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.progress-chart text {
+  font-family: 'IBM Plex Mono', monospace;
+  fill: var(--muted);
+}
+
+.progress-chart circle:hover {
+  fill: var(--forest);
+}
+
+.progress-chart figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

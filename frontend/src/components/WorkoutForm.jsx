@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './WorkoutForm.css';
 
 const MAX_MATCHES = 50;
 
@@ -297,6 +298,7 @@ function WorkoutForm({ initialWorkout, onSaved, onCancel }) {
                     <td>
                       <button
                         type="button"
+                        className="remove-button"
                         onClick={() => handleRemoveSet(exerciseIndex, setIndex)}
                         disabled={exercise.sets.length === 1}
                       >
@@ -313,6 +315,7 @@ function WorkoutForm({ initialWorkout, onSaved, onCancel }) {
             </button>
             <button
               type="button"
+              className="remove-button"
               onClick={() => handleRemoveExercise(exerciseIndex)}
             >
               Remove Exercise
@@ -331,11 +334,11 @@ function WorkoutForm({ initialWorkout, onSaved, onCancel }) {
 
         {error && <p className="form-error">{error}</p>}
 
-        <button type="submit" disabled={saving}>
+        <button type="submit" className="save-button" disabled={saving}>
           {saving ? 'Saving...' : isEditing ? 'Save Changes' : 'Save Workout'}
         </button>
         {onCancel && (
-          <button type="button" onClick={onCancel}>
+          <button type="button" className="cancel-button" onClick={onCancel}>
             Cancel
           </button>
         )}

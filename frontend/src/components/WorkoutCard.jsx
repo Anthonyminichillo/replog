@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './WorkoutCard.css';
 
 function formatDate(date) {
   return new Date(date).toLocaleDateString(undefined, {

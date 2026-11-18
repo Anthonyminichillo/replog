@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import './NavBar.css';
 
 const PAGES = [
   { id: 'exercises', label: 'Exercises' },
+  { id: 'progress', label: 'Progress' },
   { id: 'log', label: 'Log Workout' },
   { id: 'history', label: 'Workout History' },
-  { id: 'progress', label: 'Progress' },
 ];
 
 function NavBar({ currentPage, onNavigate }) {

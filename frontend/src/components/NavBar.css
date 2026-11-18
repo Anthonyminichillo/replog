@@ -1,0 +1,46 @@
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 5%;
+  background: #ded9c9;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-button {
+  padding: 11px 17px;
+  color: var(--forest);
+  background: var(--cream);
+  border: 1px solid #b8b39f;
+  border-radius: 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-button:hover {
+  color: var(--cream);
+  background: var(--olive);
+}
+
+.nav-button.active {
+  color: var(--cream);
+  background: var(--forest);
+  border-color: var(--forest);
+  box-shadow: inset 0 -3px 0 var(--khaki);
+}
+
+@media (max-width: 650px) {
+  .nav-bar {
+    padding: 12px 20px;
+  }
+
+  .nav-button {
+    flex: 1 1 calc(50% - 8px);
+  }
+}

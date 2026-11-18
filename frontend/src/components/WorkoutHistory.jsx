@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import WorkoutCard from './WorkoutCard.jsx';
 import WorkoutForm from './WorkoutForm.jsx';
+import './WorkoutHistory.css';
 
 const PAGE_SIZE = 20;
 const DAY_MS = 1000 * 60 * 60 * 24;
