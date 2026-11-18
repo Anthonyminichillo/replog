@@ -8,6 +8,14 @@ Anthony Minichillo and Alex Dat Huynh
 
 [CS5610 Web Development](https://northeastern.instructure.com/courses/261032)
 
+## Vercel Link
+
+[Vercel](replog-beryl.vercel.app)
+
+## Render Link
+
+[Render](https://replog-backend.onrender.com)
+
 ## Project Objective
 
 RepLog is a workout logging web app. Users browse and filter an exercise
@@ -15,6 +23,7 @@ library, log workouts (sets, reps, weight, duration), and track personal
 records and progress over time.
 
 ## Screenshot
+
 ![Login page](docs/loginpage.png)
 ![Add Exercise page](docs/addexercise.png)
 ![Excercise List page](docs/viewexercise.png)
