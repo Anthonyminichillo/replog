@@ -4,6 +4,7 @@ const PAGES = [
   { id: 'exercises', label: 'Exercises' },
   { id: 'log', label: 'Log Workout' },
   { id: 'history', label: 'Workout History' },
+  { id: 'progress', label: 'Progress' },
 ];
 
 function NavBar({ currentPage, onNavigate }) {

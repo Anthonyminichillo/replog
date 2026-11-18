@@ -6,6 +6,7 @@ import Register from './components/Register.jsx';
 import NavBar from './components/NavBar.jsx';
 import WorkoutHistory from './components/WorkoutHistory.jsx';
 import WorkoutForm from './components/WorkoutForm.jsx';
+import ProgressTracker from './components/ProgressTracker.jsx';
 import './App.css';
 
 function App() {
@@ -117,7 +118,10 @@ function App() {
           )}
           {page === 'log' && <WorkoutForm onSaved={() => setPage('history')} />}
 
+
           {page === 'history' && <WorkoutHistory />}
+          {page === 'progress' && <ProgressTracker />}
+          
         </>
       ) : (
         <div className="auth-layout">
