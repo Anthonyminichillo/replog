@@ -16,6 +16,12 @@ Anthony Minichillo and Alex Dat Huynh
 
 [Render](https://replog-backend.onrender.com)
 
+## Extra Info
+
+[Video Demo](https://youtu.be/OzKWIMkMNP0)
+[Design Doc](https://docs.google.com/document/d/16YXKKYO_eTcrD2gtzVDNmX95JFbV6zTlm_BhFsxhyF4/edit?tab=t.0)
+[Slides](https://docs.google.com/presentation/d/1UdwiPyoHTnvDUtOcsuXkoglwqembm3qEX9Jl_ZE2d2s/edit?slide=id.h16bcb46f19f1a3ce_6_0#slide=id.h16bcb46f19f1a3ce_6_0)
+
 ## Project Objective
 
 RepLog is a workout logging web app. Users browse and filter an exercise
