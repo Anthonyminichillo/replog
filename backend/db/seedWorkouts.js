@@ -9,9 +9,24 @@ const TEST_PASSWORD = 'password123';
 
 // One test user per persona. Gaps control how often they train.
 const testUsers = [
-  { email: 'marcus@replog.test', workoutCount: 300, maxGapDays: 4, strength: 0.6 },
-  { email: 'priya@replog.test', workoutCount: 450, maxGapDays: 3, strength: 1.2 },
-  { email: 'jordan@replog.test', workoutCount: 250, maxGapDays: 9, strength: 0.9 },
+  {
+    email: 'marcus@replog.test',
+    workoutCount: 300,
+    maxGapDays: 4,
+    strength: 0.6,
+  },
+  {
+    email: 'priya@replog.test',
+    workoutCount: 450,
+    maxGapDays: 3,
+    strength: 1.2,
+  },
+  {
+    email: 'jordan@replog.test',
+    workoutCount: 250,
+    maxGapDays: 9,
+    strength: 0.9,
+  },
 ];
 
 const workoutNotes = [
@@ -35,7 +50,7 @@ function buildDates(count, maxGapDays) {
   for (let i = 0; i < count; i++) {
     dates.push(new Date(date));
     date.setDate(
-      date.getDate() - faker.number.int({ min: 1, max: maxGapDays }),
+      date.getDate() - faker.number.int({ min: 1, max: maxGapDays })
     );
   }
   return dates.reverse();
@@ -46,7 +61,7 @@ function buildWorkouts(user, userId, exercises) {
     exercises.map((exercise) => [
       exercise._id.toString(),
       faker.number.int({ min: 8, max: 27 }) * 5 * user.strength,
-    ]),
+    ])
   );
   const dates = buildDates(user.workoutCount, user.maxGapDays);
 
@@ -65,14 +80,14 @@ function buildWorkouts(user, userId, exercises) {
         const weight = isBodyweight
           ? 0
           : roundToFive(
-              startWeights.get(exercise._id.toString()) * (1 + 0.4 * progress),
+              startWeights.get(exercise._id.toString()) * (1 + 0.4 * progress)
             );
         return {
           exerciseId: exercise._id,
           exerciseName: exercise.name,
           sets: Array.from(
             { length: faker.number.int({ min: 3, max: 4 }) },
-            () => ({ reps: faker.number.int({ min: 5, max: 10 }), weight }),
+            () => ({ reps: faker.number.int({ min: 5, max: 10 }), weight })
           ),
         };
       }),
@@ -91,7 +106,7 @@ try {
     .collection('exercises')
     .find(
       { name: / - Standard$/, type: 'Strength' },
-      { projection: { name: 1, equipment: 1 } },
+      { projection: { name: 1, equipment: 1 } }
     )
     .toArray();
   if (exercises.length === 0) {
@@ -112,7 +127,7 @@ try {
           createdAt: new Date(),
         },
       },
-      { upsert: true },
+      { upsert: true }
     );
     const { _id } = await users.findOne({ email: user.email });
 

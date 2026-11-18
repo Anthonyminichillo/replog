@@ -27,6 +27,13 @@ records and progress over time.
 5. Start the backend: `npm start`
 6. Frontend: `cd frontend && npm install && npm run dev`
 
+## Test Login
+
+- Email: `priya@replog.test`
+- Password: `password123`
+
+(Also available: `marcus@replog.test`, `jordan@replog.test`)
+
 ## License
 
 MIT

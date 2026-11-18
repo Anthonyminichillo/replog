@@ -3,6 +3,8 @@ import ExerciseList from './components/ExerciseList.jsx';
 import AddExercise from './components/AddExercise.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
+import NavBar from './components/NavBar.jsx';
+import WorkoutHistory from './components/WorkoutHistory.jsx';
 import './App.css';
 
 function App() {
@@ -10,6 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [authPage, setAuthPage] = useState('login');
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState('exercises');
 
   useEffect(() => {
     async function checkLogin() {
@@ -65,6 +68,7 @@ function App() {
 
       setUser(null);
       setAuthPage('login');
+      setPage('exercises');
     } catch (error) {
       console.error('Unable to log out:', error);
     }
@@ -102,8 +106,16 @@ function App() {
 
       {user ? (
         <>
-          <AddExercise onExerciseAdded={handleExerciseAdded} />
-          <ExerciseList key={refresh} />
+          <NavBar currentPage={page} onNavigate={setPage} />
+
+          {page === 'exercises' && (
+            <>
+              <AddExercise onExerciseAdded={handleExerciseAdded} />
+              <ExerciseList key={refresh} />
+            </>
+          )}
+
+          {page === 'history' && <WorkoutHistory />}
         </>
       ) : (
         <div className="auth-layout">
